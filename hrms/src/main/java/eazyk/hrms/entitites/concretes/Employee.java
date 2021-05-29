@@ -1,6 +1,7 @@
 package eazyk.hrms.entitites.concretes;
 
 import eazyk.hrms.entitites.abstracts.User;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,14 +9,16 @@ import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Employees")
-public class Employee extends User {
+@PrimaryKeyJoinColumn(name = "user_id")
+public class Employee extends User{
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
-    private int employeeId;
+    @Column(name = "user_id")
+    private int employeeId;*/
 
     @Column(name = "first_name")
     private String firstName;
@@ -26,13 +29,13 @@ public class Employee extends User {
     @Column(name = "job_detail")
     private String jobDetail;
 
-    public Employee(int userId, String email, String password, boolean isVerify, int employeeId, String firstName, String lastName, String jobDetail) {
+  /*  public Employee(int userId, String email, String password, boolean isVerify, int employeeId, String firstName, String lastName, String jobDetail) {
         super(userId, email, password, isVerify);
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobDetail = jobDetail;
-    }
+    }*/
 
 
 }
