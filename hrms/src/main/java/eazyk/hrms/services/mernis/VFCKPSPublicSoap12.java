@@ -1,4 +1,4 @@
-package eazyk.hrms.core.mernis;
+package eazyk.hrms.services.mernis;
 
 //----------------------------------------------------
 //
@@ -13,16 +13,12 @@ package eazyk.hrms.core.mernis;
 
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.*;
-import org.ksoap2.transport.*;
-import org.kxml2.kdom.Element;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
-public class VFCKPSPublicSoap
+public class VFCKPSPublicSoap12
 {
     interface VFCIWcfMethod
     {
@@ -39,14 +35,14 @@ public class VFCKPSPublicSoap
     public boolean enableLogging;
 
 
-    public VFCKPSPublicSoap(){}
+    public VFCKPSPublicSoap12(){}
 
-    public VFCKPSPublicSoap(String url)
+    public VFCKPSPublicSoap12(String url)
     {
         this.url = url;
     }
 
-    public VFCKPSPublicSoap(String url,int timeOut)
+    public VFCKPSPublicSoap12(String url,int timeOut)
     {
         this.url = url;
         this.timeOut=timeOut;
@@ -81,7 +77,7 @@ public class VFCKPSPublicSoap
 
     protected VFCExtendedSoapSerializationEnvelope createEnvelope()
     {
-        VFCExtendedSoapSerializationEnvelope envelope= new VFCExtendedSoapSerializationEnvelope(VFCExtendedSoapSerializationEnvelope.VER11);
+        VFCExtendedSoapSerializationEnvelope envelope= new VFCExtendedSoapSerializationEnvelope(VFCExtendedSoapSerializationEnvelope.VER12);
         envelope.enableLogging = enableLogging;
     
         return envelope;

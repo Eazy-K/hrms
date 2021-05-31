@@ -9,7 +9,7 @@
   <Settings>
     <Url>https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx</Url>
     <ClassPrefix/>
-    <PackageName>eazyk.hrms.core.mernis</PackageName>
+    <PackageName>eazyk.hrms.services.mernis</PackageName>
     <AddDocumentation>false</AddDocumentation>
     <EnableAdvancedFeatures>true</EnableAdvancedFeatures>
     <EnableMTOM>false</EnableMTOM>

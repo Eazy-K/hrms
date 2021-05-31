@@ -1,4 +1,4 @@
-package eazyk.hrms.core.mernis;
+package eazyk.hrms.services.mernis;
 
 //----------------------------------------------------
 //
