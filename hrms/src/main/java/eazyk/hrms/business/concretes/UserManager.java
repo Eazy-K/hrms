@@ -1,6 +1,10 @@
 package eazyk.hrms.business.concretes;
 
 import eazyk.hrms.business.abstracts.UserService;
+import eazyk.hrms.core.utilities.result.DataResult;
+import eazyk.hrms.core.utilities.result.Result;
+import eazyk.hrms.core.utilities.result.SuccessDataResult;
+import eazyk.hrms.core.utilities.result.SuccessResult;
 import eazyk.hrms.dataAccess.abstracts.UserDao;
 import eazyk.hrms.entitites.abstracts.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +20,14 @@ public class UserManager implements UserService {
 
 
     @Override
-    public List<User> getAll() {
-        return this.userDao.findAll();
+    public DataResult<List<User>> getAll() {
+        return new SuccessDataResult<List<User>>( "Data Listelendi", this.userDao.findAll());
     }
 
     @Override
-    public User add(User user) {
-        return this.userDao.save(user);
+    public Result add(User user) {
+        this.userDao.save(user);
+        return new SuccessResult("Kullanıcı eklendi");
     }
 
     @Override

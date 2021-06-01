@@ -18,17 +18,17 @@ public class AuthManager implements AuthService {
     @Override
     public Result logIn(String email, String password) {
         if (!this.userService.existsByEmail(email)) {
-            return new ErrorResult(false, "Kullanıcı bulunamadı.");
+            return new ErrorResult( "Kullanıcı bulunamadı.");
         }
 
         User user = this.userService.getByEmail(email);
 
         if(!user.getPassword().equals(password)){
-            return new ErrorResult(true,"Şifre hatalı");
+            return new ErrorResult("Şifre hatalı");
         }
 
         //Verify kontrolü de burada gerçekleştirilecek
 
-        return new SuccessResult(true,"Giriş başarıyla gerçekleştirildi");
+        return new SuccessResult("Giriş başarıyla gerçekleştirildi");
     }
 }

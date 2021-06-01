@@ -1,6 +1,7 @@
 package eazyk.hrms.api.controllers;
 
 import eazyk.hrms.business.abstracts.CandidateService;
+import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
 
 import eazyk.hrms.entitites.concretes.Candidate;
@@ -19,7 +20,7 @@ public class CandidateController {
 
 
     @GetMapping("/getAll")
-    public List<Candidate> getAll() {
+    public DataResult<List<Candidate>> getAll() {
 
         return this.candidateService.getAll();
     }

@@ -2,6 +2,9 @@ package eazyk.hrms.api.controllers;
 
 
 import eazyk.hrms.business.abstracts.EmployeeService;
+import eazyk.hrms.core.utilities.result.DataResult;
+import eazyk.hrms.core.utilities.result.Result;
+import eazyk.hrms.entitites.abstracts.User;
 import eazyk.hrms.entitites.concretes.Candidate;
 import eazyk.hrms.entitites.concretes.Employee;
 import eazyk.hrms.entitites.concretes.Job;
@@ -18,12 +21,12 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/getAll")
-    public List<Employee> getAll() {
+    public DataResult<List<Employee>> getAll() {
         return this.employeeService.getAll();
     }
 
     @PostMapping("/add")
-    public Employee add (@RequestBody Employee employee) {
+    public Result add (@RequestBody Employee employee) {
 
 
         return this.employeeService.add(employee);

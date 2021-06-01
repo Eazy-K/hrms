@@ -1,14 +1,16 @@
 package eazyk.hrms.business.abstracts;
 
+import eazyk.hrms.core.utilities.result.DataResult;
+import eazyk.hrms.core.utilities.result.Result;
 import eazyk.hrms.entitites.abstracts.User;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<User> getAll();
+    DataResult<List<User>> getAll();
 
-    User add(User user);
+    Result add(User user);
 
     boolean existsByEmail(String email);
 

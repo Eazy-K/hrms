@@ -2,10 +2,13 @@ package eazyk.hrms.api.controllers;
 
 
 import eazyk.hrms.business.abstracts.UserService;
+import eazyk.hrms.core.utilities.result.DataResult;
+import eazyk.hrms.core.utilities.result.Result;
 import eazyk.hrms.entitites.abstracts.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 @RestController
@@ -16,13 +19,13 @@ public class UsersController {
     private UserService userService;
 
     @GetMapping("/getAll")
-    public List<User> getAll() {
+    public DataResult<List<User>> getAll() {
 
         return this.userService.getAll();
     }
 
     @PostMapping("/add")
-    public User add(@RequestBody User user) {
+    public Result add(@RequestBody User user) {
         return this.userService.add(user);
     }
 

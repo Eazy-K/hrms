@@ -1,6 +1,9 @@
 package eazyk.hrms.api.controllers;
 
 import eazyk.hrms.business.abstracts.EmployerService;
+import eazyk.hrms.core.utilities.result.DataResult;
+import eazyk.hrms.core.utilities.result.Result;
+import eazyk.hrms.entitites.abstracts.User;
 import eazyk.hrms.entitites.concretes.Candidate;
 import eazyk.hrms.entitites.concretes.Employee;
 import eazyk.hrms.entitites.concretes.Employer;
@@ -17,12 +20,12 @@ public class EmployerController {
     private EmployerService employerService;
 
     @GetMapping("/getAll")
-    public List<Employer> getAll() {
+    public DataResult<List<Employer>> getAll() {
         return this.employerService.getAll();
     }
 
     @PostMapping("/add")
-    public Employer add (@RequestBody Employer employer) {
+    public Result add (@RequestBody Employer employer) {
         return this.employerService.add(employer);
     }
 }

@@ -1,5 +1,7 @@
 package eazyk.hrms.business.abstracts;
 
+import eazyk.hrms.core.utilities.result.DataResult;
+import eazyk.hrms.core.utilities.result.Result;
 import eazyk.hrms.entitites.concretes.Candidate;
 import eazyk.hrms.entitites.concretes.Employee;
 import eazyk.hrms.entitites.concretes.Employer;
@@ -8,7 +10,7 @@ import java.util.List;
 
 public interface EmployerService {
 
-    List<Employer> getAll();
+    DataResult<List<Employer>> getAll();
 
-    Employer add(Employer employer);
+    Result add(Employer employer);
 }
