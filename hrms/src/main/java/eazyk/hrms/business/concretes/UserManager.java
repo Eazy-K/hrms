@@ -24,4 +24,18 @@ public class UserManager implements UserService {
     public User add(User user) {
         return this.userDao.save(user);
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return this.userDao.existsByEmail(email);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return this.userDao.getByEmail(email);
+    }
+
+
 }
+
+
