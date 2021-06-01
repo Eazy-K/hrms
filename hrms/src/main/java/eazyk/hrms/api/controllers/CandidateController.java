@@ -1,8 +1,8 @@
 package eazyk.hrms.api.controllers;
 
 import eazyk.hrms.business.abstracts.CandidateService;
-import eazyk.hrms.business.abstracts.UserService;
-import eazyk.hrms.entitites.abstracts.User;
+import eazyk.hrms.core.utilities.result.Result;
+
 import eazyk.hrms.entitites.concretes.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,7 @@ public class CandidateController {
     }
 
     @PostMapping("/add")
-    public Candidate add (@RequestBody Candidate candidate) {
+    public Result add (@RequestBody Candidate candidate) throws Exception {
 
 
         return this.candidateService.add(candidate);

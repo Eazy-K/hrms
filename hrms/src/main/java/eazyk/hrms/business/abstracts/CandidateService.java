@@ -1,5 +1,6 @@
 package eazyk.hrms.business.abstracts;
 
+import eazyk.hrms.core.utilities.result.Result;
 import eazyk.hrms.entitites.abstracts.User;
 import eazyk.hrms.entitites.concretes.Candidate;
 
@@ -9,5 +10,5 @@ public interface CandidateService {
 
     List<Candidate> getAll();
 
-    Candidate add(Candidate candidate);
+    Result add(Candidate candidate) throws Exception;
 }

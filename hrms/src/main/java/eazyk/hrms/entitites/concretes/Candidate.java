@@ -17,10 +17,7 @@ import java.util.Date;
 public class Candidate extends User{
 
 
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private int userId;*/
+
 
     @Column(name = "first_name")
     private String firstName;
@@ -32,7 +29,7 @@ public class Candidate extends User{
     private String identificationNumber;
 
     @Column(name = "birthday")
-    private Date birthday;
+    private String birthday;
 
 
 
