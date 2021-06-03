@@ -8,6 +8,7 @@ import eazyk.hrms.entitites.abstracts.User;
 import eazyk.hrms.entitites.concretes.Candidate;
 import eazyk.hrms.entitites.concretes.Employee;
 import eazyk.hrms.entitites.concretes.Job;
+import eazyk.hrms.entitites.dtos.EmployeeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/getAll")
-    public DataResult<List<Employee>> getAll() {
+    public DataResult<List<EmployeeDto>> getAll() {
         return this.employeeService.getAll();
     }
 

@@ -6,11 +6,15 @@ import eazyk.hrms.core.utilities.result.*;
 import eazyk.hrms.dataAccess.abstracts.CandidateDao;
 import eazyk.hrms.entitites.abstracts.User;
 import eazyk.hrms.entitites.concretes.Candidate;
+import eazyk.hrms.entitites.dtos.CandidateDto;
+import eazyk.hrms.entitites.dtos.JobDto;
 import eazyk.hrms.services.mail.abstracts.EmailService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CandidateManager implements CandidateService {
@@ -24,10 +28,18 @@ public class CandidateManager implements CandidateService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
 
     @Override
-    public DataResult<List<Candidate>> getAll() {
-        return new SuccessDataResult<List<Candidate>>("Data listelendi.", this.candidateDao.findAll());
+    public DataResult<List<CandidateDto>> getAll() {
+
+        List<Candidate>  candidates= this.candidateDao.findAll();
+        List<CandidateDto> candidateDtos = candidates.stream().map(candidate -> modelMapper.map(candidate, CandidateDto.class)).collect(Collectors.toList());
+
+        return new SuccessDataResult<List<CandidateDto>>
+                ("Data listelendi.", candidateDtos);
     }
 
     @Override

@@ -8,6 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -22,8 +25,11 @@ public class User {
     @Column(name = "user_id")
     private int userId;
 
+
+
     @Column(name = "email" )
     private String email;
+
 
     @Column(name = "password" )
     private String password;

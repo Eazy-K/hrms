@@ -6,33 +6,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Jobs")
+@Table(name = "cities")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","job_advertisements"})
-public class Job {
+public class City {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "job_id")
-    private int jobId;
+    @Column(name = "city_id")
+    private int cityId;
 
 
-    @NotNull
-    @Column(name = "job_name")
-    private String jobName;
+    @Column(name = "city_name")
+    private String cityName;
 
-
-    @OneToMany(mappedBy = "jobs")
+    @OneToMany(mappedBy = "cities")
     private List<JobAdvertisement> jobAdvertisements;
-
-
 
 
 

@@ -5,6 +5,7 @@ import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
 
 import eazyk.hrms.entitites.concretes.Candidate;
+import eazyk.hrms.entitites.dtos.CandidateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class CandidateController {
 
 
     @GetMapping("/getAll")
-    public DataResult<List<Candidate>> getAll() {
+    public DataResult<List<CandidateDto>> getAll() {
 
         return this.candidateService.getAll();
     }

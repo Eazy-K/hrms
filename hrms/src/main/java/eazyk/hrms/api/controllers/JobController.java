@@ -7,6 +7,7 @@ import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
 import eazyk.hrms.entitites.abstracts.User;
 import eazyk.hrms.entitites.concretes.Job;
+import eazyk.hrms.entitites.dtos.JobDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +21,13 @@ public class JobController {
     private JobService jobService;
 
     @GetMapping("/getAll")
-    public DataResult<List<Job>> getAll() {
-        return this.jobService.getAll();
+    public DataResult<List<JobDto>> getByJobName() {
+        return this.jobService.getJobDetails();
     }
 
     @PostMapping("/add")
-    public Result add (@RequestBody Job job) {
-        return this.jobService.add(job);
+    public Result add (@RequestBody JobDto jobDto) {
+        return this.jobService.add(jobDto);
     }
 
 
