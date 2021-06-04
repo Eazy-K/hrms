@@ -22,6 +22,8 @@ public class JobAdvertisementDtoAdd {
 
     private Date positionDeadline;
 
+    private boolean positionIsActive;
+
     private int employerId;
 
     private int jobId;

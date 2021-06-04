@@ -14,8 +14,11 @@ public interface JobAdvertisementService {
 
     DataResult<List<JobAdvertisementDtoGet>> getAll();
 
- //   DataResult<List<JobAdvertisementDtoGet>> getByPositionDeadlineAfterAndReleaseDAte(Date positionDeadline, Date releaseDAte);
+    DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrue();
 
+    DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueOrderByReleaseDAte();
+
+    DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueAndAndEmployersCompanyName(String companyName);
 
 
 

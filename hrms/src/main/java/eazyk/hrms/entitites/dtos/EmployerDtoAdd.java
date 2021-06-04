@@ -18,4 +18,6 @@ public class EmployerDtoAdd {
     private String email;
 
     private String password;
+
+
 }

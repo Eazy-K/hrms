@@ -64,7 +64,37 @@ public class JobAdvertisementManager implements JobAdvertisementService {
                  ("Data listelendi.", jobAdvertisementDtoGets);
     }
 
+    @Override
+    public DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrue() {
 
+        List<JobAdvertisement> jobAdvertisements = this.jobAdvertisementDao.getByPositionIsActiveIsTrue();
+        List<JobAdvertisementDtoGet> jobAdvertisementDtoGets = jobAdvertisements.stream().map(jobAdvertisement -> modelMapper.map(jobAdvertisement, JobAdvertisementDtoGet.class)).collect(Collectors.toList());
+
+        return new SuccessDataResult<List<JobAdvertisementDtoGet>>("Data listelendi.", jobAdvertisementDtoGets);
+
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueOrderByReleaseDAte() {
+
+        List<JobAdvertisement> jobAdvertisements = this.jobAdvertisementDao.getByPositionIsActiveIsTrueOrderByReleaseDAte();
+        List<JobAdvertisementDtoGet> jobAdvertisementDtoGets = jobAdvertisements.stream().map(jobAdvertisement -> modelMapper.map(jobAdvertisement, JobAdvertisementDtoGet.class)).collect(Collectors.toList());
+
+
+        return new SuccessDataResult<List<JobAdvertisementDtoGet>>("Data listelendi.", jobAdvertisementDtoGets);
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueAndAndEmployersCompanyName(String companyName) {
+
+        List<JobAdvertisement> jobAdvertisements = this.jobAdvertisementDao.getByPositionIsActiveIsTrueAndAndEmployersCompanyName(companyName);
+        List<JobAdvertisementDtoGet> jobAdvertisementDtoGets = jobAdvertisements.stream().map(jobAdvertisement -> modelMapper.map(jobAdvertisement, JobAdvertisementDtoGet.class)).collect(Collectors.toList());
+
+        return new SuccessDataResult<List<JobAdvertisementDtoGet>>("Data listelendi.", jobAdvertisementDtoGets);
+
+
+
+    }
 
 
 }

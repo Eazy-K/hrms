@@ -28,5 +28,22 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.getAll();
     }
 
+    @GetMapping("getAllActiveAdvertisements")
+    public DataResult<List<JobAdvertisementDtoGet>> getAllActiveAdvertisements() {
+        return this.jobAdvertisementService.getByPositionIsActiveIsTrue();
+    }
+
+    @GetMapping("getByPositionIsActiveIsTrueOrderByReleaseDAte")
+    public DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueOrderByReleaseDAte() {
+        return this.jobAdvertisementService.getByPositionIsActiveIsTrueOrderByReleaseDAte();
+    }
+
+    @GetMapping("getByPositionIsActiveIsTrueAndAndEmployersCompanyName")
+    public DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueAndAndEmployersCompanyName(String companyName) {
+        return this.jobAdvertisementService.getByPositionIsActiveIsTrueAndAndEmployersCompanyName(companyName);
+    }
+
+
+
 
 }

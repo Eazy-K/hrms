@@ -39,6 +39,9 @@ public class JobAdvertisement {
     @Column(name = "position_deadline")
     private Date positionDeadline;
 
+    @Column(name = "position_is_active")
+    private boolean positionIsActive;
+
     @ManyToOne()
     @JoinColumn(name = "city_id")
     private City cities;
