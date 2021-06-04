@@ -4,11 +4,11 @@ import eazyk.hrms.business.abstracts.CandidateService;
 import eazyk.hrms.business.abstracts.CheckService;
 import eazyk.hrms.core.utilities.result.*;
 import eazyk.hrms.dataAccess.abstracts.CandidateDao;
-import eazyk.hrms.entitites.abstracts.User;
 import eazyk.hrms.entitites.concretes.Candidate;
-import eazyk.hrms.entitites.dtos.CandidateDto;
-import eazyk.hrms.entitites.dtos.JobDto;
+import eazyk.hrms.entitites.dtos.CandidateDtoAdd;
+import eazyk.hrms.entitites.dtos.CandidateDtoGet;
 import eazyk.hrms.services.mail.abstracts.EmailService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,34 +16,38 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+@RequiredArgsConstructor
 @Service
 public class CandidateManager implements CandidateService {
 
-    @Autowired
-    private CandidateDao candidateDao;
 
-    @Autowired
-    private CheckService checkService;
+    private final CandidateDao candidateDao;
 
-    @Autowired
-    private EmailService emailService;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final CheckService checkService;
+
+
+    private final EmailService emailService;
+
+
+    private final ModelMapper modelMapper;
 
 
     @Override
-    public DataResult<List<CandidateDto>> getAll() {
+    public DataResult<List<CandidateDtoGet>> getAll() {
 
         List<Candidate>  candidates= this.candidateDao.findAll();
-        List<CandidateDto> candidateDtos = candidates.stream().map(candidate -> modelMapper.map(candidate, CandidateDto.class)).collect(Collectors.toList());
+        List<CandidateDtoGet> candidateDtoGets = candidates.stream().map(candidate -> modelMapper.map(candidate, CandidateDtoGet.class)).collect(Collectors.toList());
 
-        return new SuccessDataResult<List<CandidateDto>>
-                ("Data listelendi.", candidateDtos);
+        return new SuccessDataResult<List<CandidateDtoGet>>
+                ("Data listelendi.", candidateDtoGets);
     }
 
     @Override
-    public Result add(Candidate candidate) throws Exception {
+    public Result add(CandidateDtoAdd candidateDtoAdd) throws Exception {
+
+        Candidate candidate = this.modelMapper.map(candidateDtoAdd, Candidate.class);
 
         if (!(this.checkService.isChecked(Long.parseLong(candidate.getIdentificationNumber()),
                 candidate.getFirstName(),
@@ -57,6 +61,7 @@ public class CandidateManager implements CandidateService {
                 candidate.getIdentificationNumber())) {
             return new ErrorResult( "Kullanıcı sistemde mevcut!");
         }
+
         this.candidateDao.save(candidate);
         this.emailService.mailSender("Doğrulama maili gönderildi.");
         return new SuccessResult("Kullanıcı doğrulanıp eklendi.");

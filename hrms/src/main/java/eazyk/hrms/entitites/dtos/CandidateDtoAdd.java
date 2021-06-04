@@ -1,27 +1,25 @@
 package eazyk.hrms.entitites.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.Getter;
+import lombok.Setter;
 
 
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class CandidateDto {
-
+@Getter
+@Setter
+public class CandidateDtoAdd {
 
     private String firstName;
 
-
     private String lastName;
-
 
     private String identificationNumber;
 
-
     private String birthday;
+
+    private String email;
+
+    private String password;
 
 
 }

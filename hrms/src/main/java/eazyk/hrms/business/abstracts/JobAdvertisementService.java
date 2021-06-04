@@ -2,17 +2,21 @@ package eazyk.hrms.business.abstracts;
 
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
-import eazyk.hrms.dataAccess.abstracts.JobAdvertisementDao;
-import eazyk.hrms.entitites.concretes.JobAdvertisement;
-import eazyk.hrms.entitites.dtos.JobAdvertisementDto;
+import eazyk.hrms.entitites.dtos.JobAdvertisementDtoAdd;
+import eazyk.hrms.entitites.dtos.JobAdvertisementDtoGet;
+
 
 import java.util.List;
 
 public interface JobAdvertisementService {
 
-    Result add(JobAdvertisement jobAdvertisement);
+    Result add(JobAdvertisementDtoAdd jobAdvertisementDtoAdd);
 
-    DataResult<List<JobAdvertisementDto>> getAll();
+    DataResult<List<JobAdvertisementDtoGet>> getAll();
+
+ //   DataResult<List<JobAdvertisementDtoGet>> getByPositionDeadlineAfterAndReleaseDAte(Date positionDeadline, Date releaseDAte);
+
+
 
 
 

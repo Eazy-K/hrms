@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 
 
 @Data
@@ -19,15 +19,15 @@ public class Employee extends User{
 
 
 
-    @NotNull
+
     @Column(name = "first_name")
     private String firstName;
 
-    @NotNull
+
     @Column(name = "last_name")
     private String lastName;
 
-    @NotNull
+
     @Column(name = "job_detail")
     private String jobDetail;
 

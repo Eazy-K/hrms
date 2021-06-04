@@ -1,16 +1,13 @@
 package eazyk.hrms.entitites.abstracts;
 
 
-import eazyk.hrms.entitites.concretes.Candidate;
-import eazyk.hrms.entitites.concretes.Employer;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
 
 @Data
 @NoArgsConstructor

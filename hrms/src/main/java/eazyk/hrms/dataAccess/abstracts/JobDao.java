@@ -1,11 +1,7 @@
 package eazyk.hrms.dataAccess.abstracts;
 
 import eazyk.hrms.entitites.concretes.Job;
-import eazyk.hrms.entitites.dtos.JobDto;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 public interface JobDao extends JpaRepository<Job, Integer> {
 
@@ -16,6 +12,8 @@ public interface JobDao extends JpaRepository<Job, Integer> {
 
 
     //select j.JobId, j.jobName, * from Job j
+
+    Job getByJobId(int jobId);
 
 
 

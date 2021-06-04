@@ -6,14 +6,15 @@ import eazyk.hrms.core.utilities.result.ErrorResult;
 import eazyk.hrms.core.utilities.result.Result;
 import eazyk.hrms.core.utilities.result.SuccessResult;
 import eazyk.hrms.entitites.abstracts.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class AuthManager implements AuthService {
 
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     @Override
     public Result logIn(String email, String password) {

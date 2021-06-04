@@ -2,14 +2,15 @@ package eazyk.hrms.business.abstracts;
 
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
-import eazyk.hrms.entitites.concretes.Employee;
-import eazyk.hrms.entitites.dtos.EmployeeDto;
+import eazyk.hrms.entitites.dtos.EmployeeDtoAdd;
+import eazyk.hrms.entitites.dtos.EmployeeDtoGet;
+
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    DataResult<List<EmployeeDto>> getAll();
+    DataResult<List<EmployeeDtoGet>> getAll();
 
-    Result add(Employee employee);
+    Result add(EmployeeDtoAdd employeeDtoAdd);
 }

@@ -33,6 +33,9 @@ public class JobAdvertisement {
     @Column(name = "number_of_job_positions")
     private int numberOfJobPositions;
 
+    @Column(name = "advertisement_release")
+    private Date releaseDAte;
+
     @Column(name = "position_deadline")
     private Date positionDeadline;
 

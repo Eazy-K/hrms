@@ -5,18 +5,19 @@ import eazyk.hrms.business.abstracts.UserService;
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
 import eazyk.hrms.entitites.abstracts.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.crypto.Data;
+
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
 public class UsersController {
 
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     @GetMapping("/getAll")
     public DataResult<List<User>> getAll() {
