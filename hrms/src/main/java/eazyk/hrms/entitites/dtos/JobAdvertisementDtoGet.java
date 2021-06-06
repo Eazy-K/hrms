@@ -20,6 +20,8 @@ public class JobAdvertisementDtoGet {
 
     private Date positionDeadline;
 
+    private int cityId;
+
 
 
 

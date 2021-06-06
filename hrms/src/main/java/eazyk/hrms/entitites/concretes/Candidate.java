@@ -34,6 +34,10 @@ public class Candidate extends User{
     private String birthday;
 
 
+    @OneToOne(mappedBy = "candidate")
+    private CurriculumVitae curriculumVitae;
+
+
 
 
 

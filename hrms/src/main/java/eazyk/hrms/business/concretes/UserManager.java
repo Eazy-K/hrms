@@ -8,7 +8,6 @@ import eazyk.hrms.core.utilities.result.SuccessResult;
 import eazyk.hrms.dataAccess.abstracts.UserDao;
 import eazyk.hrms.entitites.abstracts.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +40,8 @@ public class UserManager implements UserService {
     public User getByEmail(String email) {
         return this.userDao.getByEmail(email);
     }
+
+
 
 
 }

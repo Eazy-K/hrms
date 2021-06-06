@@ -18,6 +18,10 @@ public class AuthManager implements AuthService {
 
     @Override
     public Result logIn(String email, String password) {
+
+
+
+
         if (!this.userService.existsByEmail(email)) {
             return new ErrorResult( "Kullanıcı bulunamadı.");
         }
