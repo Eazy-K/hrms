@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface UserService {
 
-    DataResult<List<User>> getAll();
+    DataResult<List<User>> getAllUsers();
 
-    Result add(User user);
+    Result saveUser(User user);
 
     boolean existsByEmail(String email);
 

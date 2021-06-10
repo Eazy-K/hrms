@@ -1,16 +1,23 @@
 package eazyk.hrms.entitites.concretes;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "work_experiences")
 public class WorkExperience {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "work_experience_id")
+    @Column(name = "id")
     private int workExperienceId;
 
     @Column(name = "company_Name")
@@ -29,9 +36,9 @@ public class WorkExperience {
     private boolean isContinue;
 
 
-    @ManyToOne
-    @JoinColumn(name = "curriculum_vitae_id")
-    private CurriculumVitae curriculumVitae;
+    @ManyToOne(targetEntity = CV.class)
+    @JoinColumn(name = "cv_id")
+    private CV cv;
 
 
 }

@@ -4,8 +4,8 @@ package eazyk.hrms.api.controllers;
 import eazyk.hrms.business.abstracts.EmployeeService;
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
-import eazyk.hrms.entitites.dtos.EmployeeDtoAdd;
-import eazyk.hrms.entitites.dtos.EmployeeDtoGet;
+import eazyk.hrms.entitites.dtos.requests.EmployeeAddRequest;
+import eazyk.hrms.entitites.dtos.responses.EmployeeResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,15 +21,16 @@ public class EmployeesController {
 
     private final EmployeeService employeeService;
 
-    @GetMapping("/getAll")
-    public DataResult<List<EmployeeDtoGet>> getAll() {
-        return this.employeeService.getAll();
+    @PostMapping("/saveEmployee")
+    public Result saveEmployee (@RequestBody EmployeeAddRequest employeeAddRequest) {
+        return this.employeeService.saveEmployee(employeeAddRequest);
     }
 
-    @PostMapping("/add")
-    public Result add (@RequestBody EmployeeDtoAdd employeeDtoAdd) {
-        return this.employeeService.add(employeeDtoAdd);
+    @GetMapping("/getEmployees")
+    public DataResult<List<EmployeeResponse>> getEmployees() {
+        return this.employeeService.getAllEmployees();
     }
+
 
 
 }

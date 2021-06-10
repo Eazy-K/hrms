@@ -3,16 +3,16 @@ package eazyk.hrms.business.abstracts;
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
 import eazyk.hrms.entitites.concretes.Employer;
-import eazyk.hrms.entitites.dtos.EmployerDtoAdd;
-import eazyk.hrms.entitites.dtos.EmployerDtoGet;
+import eazyk.hrms.entitites.dtos.requests.EmployerAddRequest;
+import eazyk.hrms.entitites.dtos.responses.EmployerResponse;
 
 import java.util.List;
 
 public interface EmployerService {
 
-    DataResult<List<EmployerDtoGet>> getAll();
+    DataResult<List<EmployerResponse>> getAllEmployers();
 
-    Result add(EmployerDtoAdd employerDtoAdd);
+    Result saveEmployer(EmployerAddRequest employerAddRequest);
 
-    Employer getByUserId(int userId);
+    Employer getById(int userId);
 }

@@ -4,8 +4,8 @@ package eazyk.hrms.api.controllers;
 import eazyk.hrms.business.abstracts.CityService;
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
-import eazyk.hrms.entitites.dtos.CityDtoAdd;
-import eazyk.hrms.entitites.dtos.CityDtoGet;
+import eazyk.hrms.entitites.dtos.requests.CityAddRequest;
+import eazyk.hrms.entitites.dtos.responses.CityResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,15 +18,17 @@ public class CitiesController {
 
     private final CityService cityService;
 
+    @PostMapping("saveCity")
+    public Result saveCity(@RequestBody CityAddRequest cityAddRequest) {
+        return this.cityService.saveCity(cityAddRequest);
+    }
+
     @GetMapping("/getAllCities")
-    public DataResult<List<CityDtoGet>> getAllCities() {
-        return this.cityService.getCities();
+    public DataResult<List<CityResponse>> getAllCities() {
+        return this.cityService.getAllCities();
 
     }
-    @PostMapping("addCity")
-    public Result addCity(@RequestBody CityDtoAdd cityDtoAdd) {
-        return this.cityService.addCity(cityDtoAdd);
-    }
+
 
 
 

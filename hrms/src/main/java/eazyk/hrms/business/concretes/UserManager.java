@@ -1,6 +1,7 @@
 package eazyk.hrms.business.concretes;
 
 import eazyk.hrms.business.abstracts.UserService;
+import eazyk.hrms.core.utilities.converters.dtoConverter.DtoConverterService;
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
 import eazyk.hrms.core.utilities.result.SuccessDataResult;
@@ -19,14 +20,16 @@ public class UserManager implements UserService {
 
     private final UserDao userDao;
 
+    private final DtoConverterService dtoConverterService;
+
 
     @Override
-    public DataResult<List<User>> getAll() {
+    public DataResult<List<User>> getAllUsers() {
         return new SuccessDataResult<List<User>>( "Data Listelendi", this.userDao.findAll());
     }
 
     @Override
-    public Result add(User user) {
+    public Result saveUser(User user) {
         this.userDao.save(user);
         return new SuccessResult("Kullanıcı eklendi");
     }

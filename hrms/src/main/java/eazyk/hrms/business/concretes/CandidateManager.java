@@ -2,19 +2,18 @@ package eazyk.hrms.business.concretes;
 
 import eazyk.hrms.business.abstracts.CandidateService;
 import eazyk.hrms.business.abstracts.CheckService;
+import eazyk.hrms.core.utilities.converters.dtoConverter.DtoConverterService;
 import eazyk.hrms.core.utilities.result.*;
 import eazyk.hrms.dataAccess.abstracts.CandidateDao;
 import eazyk.hrms.entitites.concretes.Candidate;
-import eazyk.hrms.entitites.dtos.CandidateDtoAdd;
-import eazyk.hrms.entitites.dtos.CandidateDtoGet;
+import eazyk.hrms.entitites.dtos.requests.CandidateAddRequest;
+import eazyk.hrms.entitites.dtos.responses.CandidateResponse;
 import eazyk.hrms.services.mail.abstracts.EmailService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 @RequiredArgsConstructor
@@ -30,24 +29,22 @@ public class CandidateManager implements CandidateService {
 
     private final EmailService emailService;
 
+    private final DtoConverterService dtoConverterService;
 
-    private final ModelMapper modelMapper;
 
 
     @Override
-    public DataResult<List<CandidateDtoGet>> getAll() {
+    public DataResult<List<CandidateResponse>> getAllCandidates() {
 
-        List<Candidate>  candidates= this.candidateDao.findAll();
-        List<CandidateDtoGet> candidateDtoGets = candidates.stream().map(candidate -> modelMapper.map(candidate, CandidateDtoGet.class)).collect(Collectors.toList());
-
-        return new SuccessDataResult<List<CandidateDtoGet>>
-                ("Data listelendi.", candidateDtoGets);
+        return new SuccessDataResult<List<CandidateResponse>>("Data listelendi.",
+                this.dtoConverterService.dtoConverter(this.candidateDao.findAll(), CandidateResponse.class));
     }
 
     @Override
-    public Result add(CandidateDtoAdd candidateDtoAdd) throws Exception {
+    public Result saveCandidate(CandidateAddRequest candidateAddRequest) throws Exception {
 
-        Candidate candidate = this.modelMapper.map(candidateDtoAdd, Candidate.class);
+
+        Candidate candidate = (Candidate) this.dtoConverterService.dtoClassConverter(candidateAddRequest, Candidate.class);
 
         if (!(this.checkService.isChecked(Long.parseLong(candidate.getIdentificationNumber()),
                 candidate.getFirstName(),
@@ -68,7 +65,10 @@ public class CandidateManager implements CandidateService {
 
     }
 
-
+    @Override
+    public Candidate findById(int userId) {
+        return this.candidateDao.findById(userId);
+    }
 
 
 }

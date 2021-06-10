@@ -14,24 +14,24 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "Social_media")
-public class SocialMedia {
+//@PrimaryKeyJoinColumn(name = "cv_id")
+public class SocialMedia{
+
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "social_media_id")
     private int socialMediaId;
 
-    @Column(name = "git_hub_linh")
+    @Column(name = "git_hub_link")
     private String gitHub;
 
 
     @Column(name = "linkedın_link")
     private String linkedIn;
 
-
-    @OneToOne
-    @JoinColumn(name = "curriculum_vitae_id")
-    private CurriculumVitae curriculumVitae;
-
+    @OneToOne(targetEntity = CV.class)
+    @JoinColumn(name = "cv_id")
+    private CV cv;
 
 }

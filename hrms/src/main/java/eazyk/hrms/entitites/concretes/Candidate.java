@@ -16,8 +16,6 @@ import javax.persistence.*;
 public class Candidate extends User{
 
 
-
-
     @Column(name = "first_name")
     private String firstName;
 
@@ -33,12 +31,8 @@ public class Candidate extends User{
     @Column(name = "birthday")
     private String birthday;
 
-
     @OneToOne(mappedBy = "candidate")
-    private CurriculumVitae curriculumVitae;
-
-
-
+    private CV cv;
 
 
 }

@@ -5,8 +5,9 @@ import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
 
 
-import eazyk.hrms.entitites.dtos.CandidateDtoAdd;
-import eazyk.hrms.entitites.dtos.CandidateDtoGet;
+import eazyk.hrms.entitites.concretes.Candidate;
+import eazyk.hrms.entitites.dtos.requests.CandidateAddRequest;
+import eazyk.hrms.entitites.dtos.responses.CandidateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,19 +22,22 @@ public class CandidatesController {
     private final CandidateService candidateService;
 
 
-
-    @GetMapping("/getAll")
-    public DataResult<List<CandidateDtoGet>> getAll() {
-
-        return this.candidateService.getAll();
+    @PostMapping("/saveCAndidate")
+    public Result saveCandidate (@RequestBody CandidateAddRequest candidateAddRequest) throws Exception {
+        return this.candidateService.saveCandidate(candidateAddRequest);
     }
 
-    @PostMapping("/add")
-    public Result add (@RequestBody CandidateDtoAdd candidateDtoAdd) throws Exception {
-
-
-        return this.candidateService.add(candidateDtoAdd);
+    @GetMapping("/getCandidates")
+    public DataResult<List<CandidateResponse>> getCandidates() {
+        return this.candidateService.getAllCandidates();
     }
+    @GetMapping("/dfdf")
+    public Candidate getCandidateById(@RequestParam int id) {
+        return this.candidateService.findById(id);
+    }
+
+
+
 
 
 

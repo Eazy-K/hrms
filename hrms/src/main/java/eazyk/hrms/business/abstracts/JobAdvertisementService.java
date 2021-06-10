@@ -2,23 +2,23 @@ package eazyk.hrms.business.abstracts;
 
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
-import eazyk.hrms.entitites.dtos.JobAdvertisementDtoAdd;
-import eazyk.hrms.entitites.dtos.JobAdvertisementDtoGet;
+import eazyk.hrms.entitites.dtos.requests.JobAdvertisementAddRequest;
+import eazyk.hrms.entitites.dtos.responses.JobAdvertisementResponse;
 
 
 import java.util.List;
 
 public interface JobAdvertisementService {
 
-    Result add(JobAdvertisementDtoAdd jobAdvertisementDtoAdd);
+    Result saveJobAdvertisement(JobAdvertisementAddRequest jobAdvertisementAddRequest);
 
-    DataResult<List<JobAdvertisementDtoGet>> getAll();
+    DataResult<List<JobAdvertisementResponse>> getAllJobAdvertisements();
 
-    DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrue();
+    DataResult<List<JobAdvertisementResponse>> getByPositionIsActiveIsTrue();
 
-    DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueOrderByReleaseDAte();
+    DataResult<List<JobAdvertisementResponse>> getByPositionIsActiveIsTrueOrderByReleaseDAte();
 
-    DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueAndAndEmployersCompanyName(String companyName);
+    DataResult<List<JobAdvertisementResponse>> getByPositionIsActiveIsTrueAndAndEmployersCompanyName(String companyName);
 
 
 

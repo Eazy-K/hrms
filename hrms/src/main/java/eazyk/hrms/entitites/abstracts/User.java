@@ -19,9 +19,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private int userId;
-
+    @Column(name = "id")
+    private int id;
 
 
     @Column(name = "email" )

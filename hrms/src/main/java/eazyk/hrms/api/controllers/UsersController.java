@@ -19,16 +19,17 @@ public class UsersController {
 
     private final UserService userService;
 
-    @GetMapping("/getAll")
-    public DataResult<List<User>> getAll() {
-
-        return this.userService.getAll();
-    }
-
-    @PostMapping("/add")
+    @PostMapping("/saveUser")
     public Result add(@RequestBody User user) {
-        return this.userService.add(user);
+        return this.userService.saveUser(user);
     }
+
+
+    @GetMapping("/getUsers")
+    public DataResult<List<User>> getAll() {
+        return this.userService.getAllUsers();
+    }
+
 
 
 }

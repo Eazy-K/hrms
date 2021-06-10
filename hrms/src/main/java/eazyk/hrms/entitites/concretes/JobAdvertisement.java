@@ -17,7 +17,7 @@ public class JobAdvertisement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "job_advertisement_id")
+    @Column(name = "id")
     private int jobAdvertisementIid;
 
 
@@ -48,7 +48,7 @@ public class JobAdvertisement {
 
     @ManyToOne()
     @JoinColumn(name = "job_id")
-    private Job jobs;
+    private JobPosition jobs;
 
     @ManyToOne()
     @JoinColumn(name = "user_id")

@@ -18,7 +18,7 @@ public class School {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "school_id")
+    @Column(name = "id")
     private int schoolId;
 
     @Column(name = "description")
@@ -39,7 +39,9 @@ public class School {
     @Column(name = "is_continue")
     private boolean isContinue;
 
-    @ManyToOne
-    @JoinColumn(name = "curriculum_vitae_id")
-    private CurriculumVitae curriculumVitae;
+    @ManyToOne(targetEntity = CV.class)
+    @JoinColumn(name = "cv_id")
+    private CV cv;
+
+
 }

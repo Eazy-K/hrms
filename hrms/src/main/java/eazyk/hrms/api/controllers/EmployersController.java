@@ -3,8 +3,8 @@ package eazyk.hrms.api.controllers;
 import eazyk.hrms.business.abstracts.EmployerService;
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
-import eazyk.hrms.entitites.dtos.EmployerDtoAdd;
-import eazyk.hrms.entitites.dtos.EmployerDtoGet;
+import eazyk.hrms.entitites.dtos.requests.EmployerAddRequest;
+import eazyk.hrms.entitites.dtos.responses.EmployerResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +18,15 @@ public class EmployersController {
 
     private final EmployerService employerService;
 
-    @GetMapping("/getAll")
-    public DataResult<List<EmployerDtoGet>> getAll() {
-        return this.employerService.getAll();
+    @PostMapping("/saveEmployer")
+    public Result saveEployer (@RequestBody EmployerAddRequest employerAddRequest) {
+        return this.employerService.saveEmployer(employerAddRequest);
     }
 
-    @PostMapping("/add")
-    public Result add (@RequestBody EmployerDtoAdd employerDtoAdd) {
-        return this.employerService.add(employerDtoAdd);
+    @GetMapping("/getEmployers")
+    public DataResult<List<EmployerResponse>> getEmployers() {
+        return this.employerService.getAllEmployers();
     }
+
+
 }

@@ -1,18 +1,17 @@
 package eazyk.hrms.business.concretes;
 
 import eazyk.hrms.business.abstracts.EmployerService;
+import eazyk.hrms.core.utilities.converters.dtoConverter.DtoConverterService;
 import eazyk.hrms.core.utilities.result.*;
 import eazyk.hrms.dataAccess.abstracts.EmployerDao;
 import eazyk.hrms.entitites.concretes.Employer;
-import eazyk.hrms.entitites.dtos.EmployerDtoAdd;
-import eazyk.hrms.entitites.dtos.EmployerDtoGet;
+import eazyk.hrms.entitites.dtos.requests.EmployerAddRequest;
+import eazyk.hrms.entitites.dtos.responses.EmployerResponse;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RequiredArgsConstructor
 @Service
@@ -21,36 +20,34 @@ public class EmployerManager implements EmployerService {
 
     private final EmployerDao employerDao;
 
+    private final DtoConverterService dtoConverterService;
 
-    private final ModelMapper modelMapper;
+
+
 
 
     @Override
-    public DataResult<List<EmployerDtoGet>> getAll() {
+    public DataResult<List<EmployerResponse>> getAllEmployers() {
 
-        List<Employer> employers = this.employerDao.findAll();
-        List<EmployerDtoGet> employerDtoGets = employers.stream().map(item -> modelMapper.map(item, EmployerDtoGet.class)).collect(Collectors.toList());
-
-        return new SuccessDataResult<List<EmployerDtoGet>>
-                ("Data listelendi.", employerDtoGets);
+        return new SuccessDataResult<List<EmployerResponse>>("Data listelendi.",
+                this.dtoConverterService.dtoConverter(this.employerDao.findAll(), EmployerResponse.class));
     }
 
     @Override
-    public Result add(EmployerDtoAdd employerDtoAdd) {
+    public Result saveEmployer(EmployerAddRequest employerAddRequest) {
 
-        Employer employer = this.modelMapper.map(employerDtoAdd, Employer.class);
-
+        Employer employer = (Employer) this.dtoConverterService.dtoClassConverter(employerAddRequest, Employer.class);
 
         if(this.employerDao.existsByEmail(employer.getEmail())) {
             return new ErrorResult("Kullanıcı sistemde mevcut!");
         }
-
         this.employerDao.save(employer);
+
         return new SuccessResult("İş veren eklendi.");
     }
 
     @Override
-    public Employer getByUserId(int userId) {
-        return this.employerDao.getByUserId(userId);
+    public Employer getById(int userId) {
+        return this.employerDao.getById(userId);
     }
 }

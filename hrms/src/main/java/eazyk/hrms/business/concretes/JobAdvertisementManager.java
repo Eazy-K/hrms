@@ -3,7 +3,8 @@ package eazyk.hrms.business.concretes;
 import eazyk.hrms.business.abstracts.CityService;
 import eazyk.hrms.business.abstracts.EmployerService;
 import eazyk.hrms.business.abstracts.JobAdvertisementService;
-import eazyk.hrms.business.abstracts.JobService;
+import eazyk.hrms.business.abstracts.JobPositionService;
+import eazyk.hrms.core.utilities.converters.dtoConverter.DtoConverterService;
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
 import eazyk.hrms.core.utilities.result.SuccessDataResult;
@@ -11,12 +12,11 @@ import eazyk.hrms.core.utilities.result.SuccessResult;
 import eazyk.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import eazyk.hrms.entitites.concretes.City;
 import eazyk.hrms.entitites.concretes.Employer;
-import eazyk.hrms.entitites.concretes.Job;
+import eazyk.hrms.entitites.concretes.JobPosition;
 import eazyk.hrms.entitites.concretes.JobAdvertisement;
-import eazyk.hrms.entitites.dtos.JobAdvertisementDtoAdd;
-import eazyk.hrms.entitites.dtos.JobAdvertisementDtoGet;
+import eazyk.hrms.entitites.dtos.requests.JobAdvertisementAddRequest;
+import eazyk.hrms.entitites.dtos.responses.JobAdvertisementResponse;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,25 +29,25 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
     private final JobAdvertisementDao jobAdvertisementDao;
 
-    private final ModelMapper modelMapper;
-
     private final EmployerService employerService;
 
-    private final JobService jobService;
+    private final JobPositionService jobPositionService;
 
     private final CityService cityService;
 
+    private final DtoConverterService dtoConverterService;
 
-    public Result add(JobAdvertisementDtoAdd jobAdvertisementDtoAdd) {
 
-        JobAdvertisement jobAdvertisement = this.modelMapper.map(jobAdvertisementDtoAdd, JobAdvertisement.class);
+    public Result saveJobAdvertisement(JobAdvertisementAddRequest jobAdvertisementAddRequest) {
 
-        Employer employer = this.employerService.getByUserId(jobAdvertisementDtoAdd.getEmployerId());
-        Job job = this.jobService.getByJobId(jobAdvertisementDtoAdd.getJobId());
-        City city = this.cityService.getByCityId(jobAdvertisementDtoAdd.getCityId());
+        JobAdvertisement jobAdvertisement = (JobAdvertisement) this.dtoConverterService.dtoClassConverter(jobAdvertisementAddRequest, JobAdvertisement.class);
+
+        Employer employer = this.employerService.getById(jobAdvertisementAddRequest.getEmployerId());
+        JobPosition jobPosition = this.jobPositionService.getByJobId(jobAdvertisementAddRequest.getJobId());
+        City city = this.cityService.getByCityId(jobAdvertisementAddRequest.getCityId());
 
         jobAdvertisement.setEmployers(employer);
-        jobAdvertisement.setJobs(job);
+        jobAdvertisement.setJobs(jobPosition);
         jobAdvertisement.setCities(city);
 
         this.jobAdvertisementDao.save(jobAdvertisement);
@@ -55,42 +55,66 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
-    public DataResult<List<JobAdvertisementDtoGet>> getAll() {
+    public DataResult<List<JobAdvertisementResponse>> getAllJobAdvertisements() {
 
         List<JobAdvertisement> jobAdvertisements = this.jobAdvertisementDao.findAll();
-        List<JobAdvertisementDtoGet> jobAdvertisementDtoGets = jobAdvertisements.stream().map(jobAdvertisement -> modelMapper.map(jobAdvertisement, JobAdvertisementDtoGet.class)).collect(Collectors.toList());
-
-         return new SuccessDataResult<List<JobAdvertisementDtoGet>>
-                 ("Data listelendi.", jobAdvertisementDtoGets);
+        List<JobAdvertisementResponse> jobAdvertisementResponses = jobAdvertisements.stream().map(item -> new JobAdvertisementResponse(item.getJobAdvertisementIid(),
+                item.getJobDesctription(),
+                item.getNumberOfJobPositions(),
+                item.getReleaseDAte(),
+                item.getPositionDeadline(),
+                item.getEmployers().getId(),
+                item.getJobs().getJobId(),
+                item.getCities().getCityId())).collect(Collectors.toList());
+         return new SuccessDataResult<List<JobAdvertisementResponse>>
+                 ("Data listelendi.", jobAdvertisementResponses);
     }
 
     @Override
-    public DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrue() {
+    public DataResult<List<JobAdvertisementResponse>> getByPositionIsActiveIsTrue() {
 
         List<JobAdvertisement> jobAdvertisements = this.jobAdvertisementDao.getByPositionIsActiveIsTrue();
-        List<JobAdvertisementDtoGet> jobAdvertisementDtoGets = jobAdvertisements.stream().map(jobAdvertisement -> modelMapper.map(jobAdvertisement, JobAdvertisementDtoGet.class)).collect(Collectors.toList());
-
-        return new SuccessDataResult<List<JobAdvertisementDtoGet>>("Data listelendi.", jobAdvertisementDtoGets);
+        List<JobAdvertisementResponse> jobAdvertisementResponses = jobAdvertisements.stream().map(item -> new JobAdvertisementResponse(item.getJobAdvertisementIid(),
+                item.getJobDesctription(),
+                item.getNumberOfJobPositions(),
+                item.getReleaseDAte(),
+                item.getPositionDeadline(),
+                item.getEmployers().getId(),
+                item.getJobs().getJobId(),
+                item.getCities().getCityId())).collect(Collectors.toList());
+        return new SuccessDataResult<List<JobAdvertisementResponse>>("Data listelendi.", jobAdvertisementResponses);
 
     }
 
     @Override
-    public DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueOrderByReleaseDAte() {
+    public DataResult<List<JobAdvertisementResponse>> getByPositionIsActiveIsTrueOrderByReleaseDAte() {
 
         List<JobAdvertisement> jobAdvertisements = this.jobAdvertisementDao.getByPositionIsActiveIsTrueOrderByReleaseDAte();
-        List<JobAdvertisementDtoGet> jobAdvertisementDtoGets = jobAdvertisements.stream().map(jobAdvertisement -> modelMapper.map(jobAdvertisement, JobAdvertisementDtoGet.class)).collect(Collectors.toList());
+        List<JobAdvertisementResponse> jobAdvertisementResponses = jobAdvertisements.stream().map(item -> new JobAdvertisementResponse(item.getJobAdvertisementIid(),
+                item.getJobDesctription(),
+                item.getNumberOfJobPositions(),
+                item.getReleaseDAte(),
+                item.getPositionDeadline(),
+                item.getEmployers().getId(),
+                item.getJobs().getJobId(),
+                item.getCities().getCityId())).collect(Collectors.toList());
 
-
-        return new SuccessDataResult<List<JobAdvertisementDtoGet>>("Data listelendi.", jobAdvertisementDtoGets);
+        return new SuccessDataResult<List<JobAdvertisementResponse>>("Data listelendi.", jobAdvertisementResponses);
     }
 
     @Override
-    public DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueAndAndEmployersCompanyName(String companyName) {
+    public DataResult<List<JobAdvertisementResponse>> getByPositionIsActiveIsTrueAndAndEmployersCompanyName(String companyName) {
 
         List<JobAdvertisement> jobAdvertisements = this.jobAdvertisementDao.getByPositionIsActiveIsTrueAndAndEmployersCompanyName(companyName);
-        List<JobAdvertisementDtoGet> jobAdvertisementDtoGets = jobAdvertisements.stream().map(jobAdvertisement -> modelMapper.map(jobAdvertisement, JobAdvertisementDtoGet.class)).collect(Collectors.toList());
-
-        return new SuccessDataResult<List<JobAdvertisementDtoGet>>("Data listelendi.", jobAdvertisementDtoGets);
+        List<JobAdvertisementResponse> jobAdvertisementResponses = jobAdvertisements.stream().map(item -> new JobAdvertisementResponse(item.getJobAdvertisementIid(),
+                item.getJobDesctription(),
+                item.getNumberOfJobPositions(),
+                item.getReleaseDAte(),
+                item.getPositionDeadline(),
+                item.getEmployers().getId(),
+                item.getJobs().getJobId(),
+                item.getCities().getCityId())).collect(Collectors.toList());
+        return new SuccessDataResult<List<JobAdvertisementResponse>>("Data listelendi.", jobAdvertisementResponses);
 
 
 

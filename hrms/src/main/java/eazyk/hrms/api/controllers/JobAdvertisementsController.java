@@ -4,8 +4,8 @@ package eazyk.hrms.api.controllers;
 import eazyk.hrms.business.abstracts.JobAdvertisementService;
 import eazyk.hrms.core.utilities.result.DataResult;
 import eazyk.hrms.core.utilities.result.Result;
-import eazyk.hrms.entitites.dtos.JobAdvertisementDtoAdd;
-import eazyk.hrms.entitites.dtos.JobAdvertisementDtoGet;
+import eazyk.hrms.entitites.dtos.requests.JobAdvertisementAddRequest;
+import eazyk.hrms.entitites.dtos.responses.JobAdvertisementResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,28 +18,28 @@ public class JobAdvertisementsController {
 
     private final JobAdvertisementService jobAdvertisementService;
 
-    @PostMapping("/add")
-    public Result add(@RequestBody JobAdvertisementDtoAdd jobAdvertisementDtoAdd) {
-        return this.jobAdvertisementService.add(jobAdvertisementDtoAdd);
+    @PostMapping("/saveJobAdvertisement")
+    public Result saveJobAdvertisement(@RequestBody JobAdvertisementAddRequest jobAdvertisementAddRequest) {
+        return this.jobAdvertisementService.saveJobAdvertisement(jobAdvertisementAddRequest);
 
     }
-    @GetMapping("/getAll")
-    public DataResult<List<JobAdvertisementDtoGet>> getAll() {
-        return this.jobAdvertisementService.getAll();
+    @GetMapping("/getJobAdvertisements")
+    public DataResult<List<JobAdvertisementResponse>> getJobAdvertisements() {
+        return this.jobAdvertisementService.getAllJobAdvertisements();
     }
 
     @GetMapping("getAllActiveAdvertisements")
-    public DataResult<List<JobAdvertisementDtoGet>> getAllActiveAdvertisements() {
+    public DataResult<List<JobAdvertisementResponse>> getAllActiveAdvertisements() {
         return this.jobAdvertisementService.getByPositionIsActiveIsTrue();
     }
 
     @GetMapping("getByPositionIsActiveIsTrueOrderByReleaseDAte")
-    public DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueOrderByReleaseDAte() {
+    public DataResult<List<JobAdvertisementResponse>> getByPositionIsActiveIsTrueOrderByReleaseDAte() {
         return this.jobAdvertisementService.getByPositionIsActiveIsTrueOrderByReleaseDAte();
     }
 
     @GetMapping("getByPositionIsActiveIsTrueAndAndEmployersCompanyName")
-    public DataResult<List<JobAdvertisementDtoGet>> getByPositionIsActiveIsTrueAndAndEmployersCompanyName(String companyName) {
+    public DataResult<List<JobAdvertisementResponse>> getByPositionIsActiveIsTrueAndAndEmployersCompanyName(String companyName) {
         return this.jobAdvertisementService.getByPositionIsActiveIsTrueAndAndEmployersCompanyName(companyName);
     }
 
