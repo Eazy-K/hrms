@@ -11,6 +11,5 @@ public class SkillResponse {
 
     private String programmingLanguage;
 
-
     private String technology;
 }

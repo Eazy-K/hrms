@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class MernisAdapter implements CheckService {
 
-
-
-
     @Override
     public boolean isChecked(Long identificationNumber, String firstName, String lastName, int birthYear) throws Exception {
         VFCKPSPublicSoap vfckpsPublicSoap = new VFCKPSPublicSoap();

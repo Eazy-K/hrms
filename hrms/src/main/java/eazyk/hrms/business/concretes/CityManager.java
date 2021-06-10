@@ -28,15 +28,14 @@ public class CityManager implements CityService {
     @Override
     public Result saveCity(CityAddRequest cityAddRequest) {
         this.cityDao.save((City) dtoConverterService.dtoClassConverter(cityAddRequest, City.class));
-
         return new SuccessResult("Şehir eklendi.");
 
     }
 
     @Override
     public DataResult<List<CityResponse>> getAllCities() {
-        this.dtoConverterService.dtoConverter(this.cityDao.findAll(), CityResponse.class);
-        return new SuccessDataResult("Data listelendi.");
+        return new SuccessDataResult("Data listelendi.",
+                this.dtoConverterService.dtoConverter(this.cityDao.findAll(), CityResponse.class));
     }
 
     @Override

@@ -36,7 +36,6 @@ public class SkillManager implements SkillService {
 
     @Override
     public DataResult<List<SkillResponse>> getAllSkills() {
-
         return new SuccessDataResult<List<SkillResponse>>("Data listelendi.",
                 this.dtoConverterService.dtoConverter(this.skillDao.findAll(), SkillResponse.class));
     }

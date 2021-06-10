@@ -20,12 +20,9 @@ import java.util.List;
 @Service
 public class CandidateManager implements CandidateService {
 
-
     private final CandidateDao candidateDao;
 
-
     private final CheckService checkService;
-
 
     private final EmailService emailService;
 
@@ -42,7 +39,6 @@ public class CandidateManager implements CandidateService {
 
     @Override
     public Result saveCandidate(CandidateAddRequest candidateAddRequest) throws Exception {
-
 
         Candidate candidate = (Candidate) this.dtoConverterService.dtoClassConverter(candidateAddRequest, Candidate.class);
 

@@ -9,6 +9,7 @@ import eazyk.hrms.entitites.concretes.*;
 import eazyk.hrms.entitites.dtos.requests.CVAddRequest;
 import eazyk.hrms.entitites.dtos.responses.CVResponse;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +31,8 @@ public class CVManager implements CVService {
     private final DtoConverterService dtoConverterService;
     private final CloudinaryService cloudinaryService;
 
+    private final ModelMapper modelMapper;
+
 
 
 
@@ -39,17 +42,19 @@ public class CVManager implements CVService {
 
         CV cv= (CV) this.dtoConverterService.dtoClassConverter(cvAddRequest, CV.class);
         Candidate candidate = this.candidateService.findById(cvAddRequest.getId());
-        System.out.println(candidate.getFirstName());
         cv.setCandidate(candidate);
-
-
 
         List<Language> languages = this.dtoConverterService.dtoConverter(cvAddRequest.getLanguageAddRequests(), Language.class);
         List<Skill> skills = this.dtoConverterService.dtoConverter(cvAddRequest.getSkillAddRequests(), Skill.class);
         List<School> schools = this.dtoConverterService.dtoConverter(cvAddRequest.getSchoolAddRequests(), School.class);
         List<WorkExperience> workExperiences = this.dtoConverterService.dtoConverter(cvAddRequest.getWorkExperienceAddRequests(), WorkExperience.class);
 
+
+
+        this.socialMediaService.saveSocialMedia(cv.getSocialMedia());
+
         this.cvDao.save(cv);
+
 
         for (Language language : languages) {
             language.setCv(cvDao.getByCvId(cv.getCvId()));
@@ -71,8 +76,6 @@ public class CVManager implements CVService {
             this.workExperienceService.saveWorkExperience(workExperience);
         }
 
-
-
         return new SuccessResult("CV oluşturuldu.");
     }
 
@@ -90,8 +93,6 @@ public class CVManager implements CVService {
 
     @Override
     public DataResult<List<CVResponse>> getAllCVs() {
-
-
         return new SuccessDataResult<List<CVResponse>>("Data listelendi.",
                 dtoConverterService.
                         dtoConverter(cvDao.findAll(), CVResponse.class));

@@ -13,18 +13,13 @@ public class SchoolResponse {
 
     private String description;
 
-
     private String schoolName;
-
 
     private String department;
 
-
     private Date startingDate;
 
-
     private Date endDate;
-
 
     private boolean isContinue;
 

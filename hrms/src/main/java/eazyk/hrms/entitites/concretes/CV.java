@@ -7,13 +7,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-//@PrimaryKeyJoinColumn(name = "user_id")
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "Curriculum_vitaes")
-//@Inheritance(strategy = InheritanceType.JOINED)
 public class CV {
 
     @Id
@@ -34,10 +33,12 @@ public class CV {
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 
-    @OneToOne(mappedBy = "cv")
+    @OneToOne(targetEntity = SocialMedia.class)
+    @JoinColumn(name = "social_media_id")
     private SocialMedia socialMedia;
 
-    @OneToMany(mappedBy = "cv")
+    @OneToMany(targetEntity = Language.class)
+    @JoinColumn(name = "language_id")
     private List<Language> languages;
 
     @OneToMany(mappedBy = "cv")

@@ -19,8 +19,6 @@ public class LanguageManager implements LanguageService {
 
     private final LanguageDao languageDao;
 
-
-
     private final DtoConverterService dtoConverterService;
 
     @Override
@@ -32,15 +30,16 @@ public class LanguageManager implements LanguageService {
     @Override
     public Result saveLanguage(Language language) {
         this.languageDao.save(language);
-
-        return new SuccessResult("Başarılı" );
+        return new SuccessResult("Başarılı.");
     }
+
+
+
 
     @Override
     public DataResult<List<LanguageResponse>> getAllLanguages() {
-
-        return new SuccessDataResult<List<LanguageResponse>>
-                ("Data listelendi.", this.dtoConverterService.dtoConverter(languageDao.findAll(), LanguageResponse.class));
+        return new SuccessDataResult<List<LanguageResponse>>("Data listelendi.",
+                this.dtoConverterService.dtoConverter(languageDao.findAll(), LanguageResponse.class));
     }
 
 

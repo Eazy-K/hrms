@@ -16,7 +16,6 @@ public class LanguageAddRequest {
 
     private String languageName;
 
-
     private String languageLevel;
 
 

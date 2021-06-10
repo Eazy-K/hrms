@@ -10,9 +10,7 @@ public class EmployeeAddRequest {
 
     private String firstName;
 
-
     private String lastName;
-
 
     private String jobDetail;
 

@@ -20,7 +20,6 @@ public class JobAdvertisement {
     @Column(name = "id")
     private int jobAdvertisementIid;
 
-
     @Column(name = "job_desctription")
     private String jobDesctription;
 

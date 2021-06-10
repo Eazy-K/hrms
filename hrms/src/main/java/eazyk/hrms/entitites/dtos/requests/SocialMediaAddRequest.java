@@ -9,9 +9,9 @@ import javax.persistence.Column;
 @Setter
 public class SocialMediaAddRequest {
 
-
-
     private String gitHub;
 
     private String linkedIn;
+
+
 }

@@ -31,12 +31,8 @@ public class Language {
     private String languageLevel;
 
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(targetEntity = CV.class)
+    @ManyToOne()
     @JoinColumn(name = "cv_id")
     private CV cv;
-
-
-
 
 }

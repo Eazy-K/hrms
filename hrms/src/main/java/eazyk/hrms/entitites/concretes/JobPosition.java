@@ -23,11 +23,9 @@ public class JobPosition {
     @Column(name = "id")
     private int jobId;
 
-
     @NotNull
     @Column(name = "job_name")
     private String jobName;
-
 
     @OneToMany(mappedBy = "jobs")
     private List<JobAdvertisement> jobAdvertisements;

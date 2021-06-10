@@ -28,8 +28,6 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public DataResult<List<EmployeeResponse>> getAllEmployees() {
-
-
         return new SuccessDataResult<>("Data listelendi.",
                 this.dtoConverterService.dtoConverter(this.employeeDao.findAll(), EmployeeResponse.class));
     }

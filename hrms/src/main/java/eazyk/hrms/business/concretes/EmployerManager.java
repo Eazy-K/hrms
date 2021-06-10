@@ -22,13 +22,8 @@ public class EmployerManager implements EmployerService {
 
     private final DtoConverterService dtoConverterService;
 
-
-
-
-
     @Override
     public DataResult<List<EmployerResponse>> getAllEmployers() {
-
         return new SuccessDataResult<List<EmployerResponse>>("Data listelendi.",
                 this.dtoConverterService.dtoConverter(this.employerDao.findAll(), EmployerResponse.class));
     }

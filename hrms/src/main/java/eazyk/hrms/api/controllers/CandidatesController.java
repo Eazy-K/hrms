@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/candidates")
@@ -30,10 +31,6 @@ public class CandidatesController {
     @GetMapping("/getCandidates")
     public DataResult<List<CandidateResponse>> getCandidates() {
         return this.candidateService.getAllCandidates();
-    }
-    @GetMapping("/dfdf")
-    public Candidate getCandidateById(@RequestParam int id) {
-        return this.candidateService.findById(id);
     }
 
 

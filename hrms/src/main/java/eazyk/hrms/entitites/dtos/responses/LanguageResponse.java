@@ -11,9 +11,7 @@ public class LanguageResponse {
     @JsonIgnore
     private int languageId;
 
-
     private String languageName;
-
 
     private String languageLevel;
 }

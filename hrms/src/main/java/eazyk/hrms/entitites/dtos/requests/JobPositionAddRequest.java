@@ -8,8 +8,6 @@ import lombok.Setter;
 @Setter
 public class JobPositionAddRequest {
 
-
-
     private String jobName;
 
 }

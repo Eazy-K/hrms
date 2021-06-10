@@ -35,7 +35,6 @@ public class WorkExperience {
     @Column(name = "is_continue")
     private boolean isContinue;
 
-
     @ManyToOne(targetEntity = CV.class)
     @JoinColumn(name = "cv_id")
     private CV cv;

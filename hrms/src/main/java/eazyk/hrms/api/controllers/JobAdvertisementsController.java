@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+@CrossOrigin
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/jobAdvertisements")
@@ -23,8 +25,8 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.saveJobAdvertisement(jobAdvertisementAddRequest);
 
     }
-    @GetMapping("/getJobAdvertisements")
-    public DataResult<List<JobAdvertisementResponse>> getJobAdvertisements() {
+    @GetMapping("/getAllJobAdvertisements")
+    public DataResult<List<JobAdvertisementResponse>> getAllJobAdvertisements() {
         return this.jobAdvertisementService.getAllJobAdvertisements();
     }
 

@@ -7,6 +7,4 @@ public interface CityDao extends JpaRepository<City, Integer> {
 
     City getByCityId(int cityId);
 
-
-
 }

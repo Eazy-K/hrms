@@ -11,7 +11,6 @@ public class SkillAddRequest {
 
     private String programmingLanguage;
 
-
     private String technology;
 
 }

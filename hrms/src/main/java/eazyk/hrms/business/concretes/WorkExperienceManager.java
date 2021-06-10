@@ -38,7 +38,6 @@ public class WorkExperienceManager implements WorkExperienceService {
 
     @Override
     public DataResult<List<WorkExperienceResponse>> getAllWorkExperiences() {
-
         return new SuccessDataResult<List<WorkExperienceResponse>>("Data listelendi.",
                 this.dtoConverterService.dtoConverter(this.workExperienceDao.findAll(), WorkExperienceResponse.class));
     }

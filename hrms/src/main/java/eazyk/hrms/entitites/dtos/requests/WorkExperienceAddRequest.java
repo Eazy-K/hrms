@@ -11,19 +11,13 @@ import java.util.Date;
 public class WorkExperienceAddRequest {
 
 
-
-
     private String companyName;
-
 
     private String jobPosition;
 
-
     private Date startingDate;
 
-
     private Date endDate;
-
 
     private boolean isContinue;
 }

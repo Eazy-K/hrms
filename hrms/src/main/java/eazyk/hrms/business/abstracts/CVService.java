@@ -16,7 +16,6 @@ public interface CVService {
 
     Result saveImage(MultipartFile file, int cvId);
 
-
     DataResult<List<CVResponse>> getAllCVs();
 
     CV getByCvId(int cvId);

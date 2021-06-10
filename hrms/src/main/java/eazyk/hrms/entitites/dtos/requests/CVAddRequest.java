@@ -24,7 +24,7 @@ public class CVAddRequest {
 
     private String photoName;
 
-//    private SocialMediaAddRequest socialMediaAddRequest;
+    private SocialMediaAddRequest socialMediaAddRequest;
 
     private List<LanguageAddRequest> languageAddRequests;
 

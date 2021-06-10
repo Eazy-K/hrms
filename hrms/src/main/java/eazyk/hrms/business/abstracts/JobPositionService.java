@@ -11,7 +11,9 @@ import java.util.List;
 public interface JobPositionService {
 
     DataResult<List<JobPositionResponse>> getAllJobPositions();
+
     Result saveJobPosition(JobPositionAddRequest jobPositionAddRequest);
+
     JobPosition getByJobId(int jobId);
 
 

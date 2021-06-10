@@ -18,15 +18,11 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","job_advertisements"})
 public class Employer extends User{
 
-
-
     @Column(name = "company_name")
     private String companyName;
 
-
     @Column(name = "web_page")
     private String webPage;
-
 
     @Column(name = "phone_number")
     private String phoneNumber;

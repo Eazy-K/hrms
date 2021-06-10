@@ -9,12 +9,9 @@ import org.modelmapper.ModelMapper;
 @Configuration
 public class ModelMapperConfig {
 
-
     @Bean
     public ModelMapper getModelMapper() {
-
         return new ModelMapper();
-
     }
 
 

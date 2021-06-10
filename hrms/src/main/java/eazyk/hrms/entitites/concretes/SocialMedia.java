@@ -14,7 +14,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "Social_media")
-//@PrimaryKeyJoinColumn(name = "cv_id")
 public class SocialMedia{
 
 
@@ -26,12 +25,11 @@ public class SocialMedia{
     @Column(name = "git_hub_link")
     private String gitHub;
 
-
     @Column(name = "linkedın_link")
     private String linkedIn;
 
-    @OneToOne(targetEntity = CV.class)
+  /*  @OneToOne()
     @JoinColumn(name = "cv_id")
     private CV cv;
-
+*/
 }

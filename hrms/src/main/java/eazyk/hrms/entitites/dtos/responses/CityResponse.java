@@ -12,7 +12,6 @@ public class CityResponse {
 
     private int cityId;
 
-
     private String cityName;
 
 }
