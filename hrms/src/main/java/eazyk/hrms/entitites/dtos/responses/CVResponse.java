@@ -22,6 +22,8 @@ public class CVResponse {
 
     private String coverLetter;
 
+    private String photoName;
+
     private CandidateResponse candidateResponse;
 
     private List<LanguageResponse> languages;

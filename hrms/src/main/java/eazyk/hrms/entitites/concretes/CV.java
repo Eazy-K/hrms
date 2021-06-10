@@ -27,6 +27,9 @@ public class CV {
     @Column(name ="cover_letter" )
     private String coverLetter;
 
+    @Column(name = "photo_name")
+    private String photoName;
+
     @OneToOne()
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;

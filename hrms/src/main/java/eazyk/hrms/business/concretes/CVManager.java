@@ -1,6 +1,7 @@
 package eazyk.hrms.business.concretes;
 
 import eazyk.hrms.business.abstracts.*;
+import eazyk.hrms.core.utilities.cloudinary.CloudinaryService;
 import eazyk.hrms.core.utilities.converters.dtoConverter.DtoConverterService;
 import eazyk.hrms.core.utilities.result.*;
 import eazyk.hrms.dataAccess.abstracts.CVDao;
@@ -9,8 +10,10 @@ import eazyk.hrms.entitites.dtos.requests.CVAddRequest;
 import eazyk.hrms.entitites.dtos.responses.CVResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -25,6 +28,7 @@ public class CVManager implements CVService {
     private final WorkExperienceService workExperienceService;
     private final CandidateService candidateService;
     private final DtoConverterService dtoConverterService;
+    private final CloudinaryService cloudinaryService;
 
 
 
@@ -45,15 +49,7 @@ public class CVManager implements CVService {
         List<School> schools = this.dtoConverterService.dtoConverter(cvAddRequest.getSchoolAddRequests(), School.class);
         List<WorkExperience> workExperiences = this.dtoConverterService.dtoConverter(cvAddRequest.getWorkExperienceAddRequests(), WorkExperience.class);
 
-    //    SocialMedia socialMedia = this.modelMapper.map(cvAddRequest.getSocialMediaAddRequest(), SocialMedia.class);
-
-
-
         this.cvDao.save(cv);
-
-    //    socialMedia.setCv(cvDao.getByCvId(cv.getCvId()));
-     //   this.socialMediaService.saveSocialMedia(socialMedia);
-
 
         for (Language language : languages) {
             language.setCv(cvDao.getByCvId(cv.getCvId()));
@@ -80,6 +76,16 @@ public class CVManager implements CVService {
         return new SuccessResult("CV oluşturuldu.");
     }
 
+    @Override
+    public Result saveImage(MultipartFile file, int cvId) {
+        @SuppressWarnings("unchecked")
+        Map<String, String> upload = (Map<String, String>) cloudinaryService.save(file).getData();
+        String imageUrl = upload.get("url");
+        CV cv = cvDao.getByCvId(cvId);
+        cv.setPhotoName(imageUrl);
+        cvDao.save(cv);
+        return new SuccessResult("Kayıt Başarılı");
+    }
 
 
     @Override

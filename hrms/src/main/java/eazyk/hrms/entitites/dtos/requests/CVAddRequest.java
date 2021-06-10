@@ -22,6 +22,8 @@ public class CVAddRequest {
 
     private String coverLetter;
 
+    private String photoName;
+
 //    private SocialMediaAddRequest socialMediaAddRequest;
 
     private List<LanguageAddRequest> languageAddRequests;

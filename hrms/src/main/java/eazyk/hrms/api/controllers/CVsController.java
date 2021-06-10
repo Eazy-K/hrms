@@ -9,6 +9,7 @@ import eazyk.hrms.entitites.dtos.requests.CVAddRequest;
 import eazyk.hrms.entitites.dtos.responses.CVResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -27,6 +28,11 @@ public class CVsController {
     @GetMapping("/getCvList")
     public DataResult<List<CVResponse>> getAll() {
         return this.cvService.getAllCVs();
+    }
+
+    @PutMapping("/saveImage")
+    public Result saveImage(@RequestBody MultipartFile multipartFile, @RequestParam int cvId) {
+        return this.cvService.saveImage(multipartFile, cvId);
     }
 
 

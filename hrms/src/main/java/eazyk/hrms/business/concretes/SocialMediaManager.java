@@ -40,8 +40,10 @@ public class SocialMediaManager implements SocialMediaService {
                 this.dtoConverterService.dtoConverter(this.socialMediaDao.findAll(), SocialMediaResponse.class));
     }
 
-  public SocialMedia getBySocialMediaId(int socialMediaId) {
+    @Override
+    public SocialMedia getBySocialMediaId(int socialMediaId) {
         return this.socialMediaDao.getBySocialMediaId(socialMediaId);
     }
+
 
 }
